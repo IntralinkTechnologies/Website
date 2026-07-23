@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Intralink Technologies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:Inter,sans-serif;background:#07121F;color:#eef6ff;overflow-x:hidden}
+.bg{position:fixed;inset:0;background:
+radial-gradient(circle at 15% 20%,rgba(46,168,255,.18),transparent 28%),
+radial-gradient(circle at 85% 75%,rgba(21,123,255,.18),transparent 32%),
+linear-gradient(180deg,#07121F,#0d1d34);z-index:-3}
+canvas{position:fixed;inset:0;z-index:-2}
+nav{position:fixed;top:18px;left:50%;transform:translateX(-50%);
+width:min(1180px,94%);display:flex;justify-content:space-between;align-items:center;
+padding:12px 24px;border-radius:18px;background:rgba(9,20,38,.62);
+backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.08);z-index:99}
+.logo{display:flex;align-items:center;gap:14px;font-weight:800}
+.mark{width:54px;height:54px;border:3px solid #2EA8FF;border-radius:50%;
+display:grid;place-items:center;color:#fff;font-weight:800;font-size:22px;position:relative}
+.mark:after{content:"";position:absolute;right:-3px;top:8px;width:18px;height:36px;background:#07121F}
+.links a{color:#d9ebff;text-decoration:none;margin-left:20px}
+.brand{
+display:flex;
+align-items:center;
+text-decoration:none;
+}
+
+.brand img{
+height:60px;
+width:auto;
+display:block;
+}
+.hero{
+min-height:100vh;
+display:grid;
+grid-template-columns:1.1fr .9fr;
+align-items:center;
+gap:70px;
+width:min(1180px,94%);
+margin:auto;
+position:relative;
+overflow:hidden;
+padding-top:70px;
+}
+
+.hero::before{
+content:"";
+position:absolute;
+left:-180px;
+top:90px;
+width:520px;
+height:520px;
+background:radial-gradient(circle,rgba(46,168,255,.18),transparent 70%);
+filter:blur(35px);
+pointer-events:none;
+z-index:-1;
+}
+.badge{display:inline-block;padding:8px 14px;border:1px solid #2EA8FF;border-radius:99px;color:#7dd1ff}
+h1{font-size:clamp(3rem,6vw,5.4rem);line-height:1.02;margin:18px 0}
+p{color:#a9bfd7;line-height:1.7}
+.btns{
+margin-top:36px;
+display:flex;
+gap:18px;
+flex-wrap:wrap;
+}
+.btn{padding:15px 26px;border-radius:12px;text-decoration:none;font-weight:700}
+.primary{
+background:linear-gradient(135deg,#2EA8FF,#157BFF);
+color:#fff;
+box-shadow:0 12px 30px rgba(46,168,255,.30);
+transition:.3s;
+}
+.primary:hover{
+transform:translateY(-3px);
+box-shadow:
+0 20px 40px rgba(46,168,255,.35);
+}
+.secondary{
+border:1px solid rgba(46,168,255,.5);
+color:#dff5ff;
+transition:.3s;
+}
+
+.secondary:hover{
+background:rgba(46,168,255,.08);
+transform:translateY(-3px);
+}
+.panel,.card{background:rgba(14,26,47,.7);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.08);
+border-radius:22px}
+.panel{
+padding:34px;
+transition:.35s;
+}
+
+.hero .panel{
+animation:floatPanel 7s ease-in-out infinite;
+box-shadow:0 25px 70px rgba(0,0,0,.35);
+}
+section{width:min(1180px,94%);margin:auto;padding:90px 0}
+h2{
+font-size:2.6rem;
+margin-bottom:14px;
+position:relative;
+display:inline-block;
+}
+h2::after{
+content:"";
+display:block;
+width:70px;
+height:4px;
+margin-top:12px;
+border-radius:20px;
+background:linear-gradient(90deg,#2EA8FF,#157BFF);
+}
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(180px,1fr));
+gap:16px;
+margin-top:20px;
+}
+.card{
+padding:20px 22px;
+position:relative;
+overflow:hidden;
+transition:.35s;
+background:linear-gradient(180deg,
+rgba(20,35,60,.72),
+rgba(12,22,40,.82));
+}
+.card:hover{
+transform:translateY(-10px);
+border-color:#2EA8FF;
+box-shadow:
+0 25px 60px rgba(0,0,0,.35),
+0 0 30px rgba(46,168,255,.18);
+}
+.card::before{
+content:"";
+position:absolute;
+left:0;
+top:0;
+width:100%;
+height:4px;
+background:linear-gradient(90deg,#2EA8FF,#157BFF);
+opacity:0;
+transition:.35s;
+}
+
+.card:hover::before{
+opacity:1;
+}
+.icon{
+width:34px;
+height:34px;
+margin-bottom:12px;
+color:#2EA8FF;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.icon svg{
+width:100%;
+height:100%;
+stroke:currentColor;
+}
+.card h3{
+font-size:1rem;
+margin-bottom:6px;
+}
+
+.card{
+font-size:.95rem;
+}
+.twocol{display:grid;grid-template-columns:1fr 1fr;gap:30px}
+ul{padding-left:18px;color:#bfd4ea}
+.cta{padding:60px;text-align:center}
+.why-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:24px;
+margin-top:40px;
+}
+
+.why-card{
+background:rgba(14,26,47,.75);
+border:1px solid rgba(255,255,255,.08);
+border-radius:22px;
+padding:30px;
+transition:.35s;
+backdrop-filter:blur(18px);
+}
+
+.why-card:hover{
+transform:translateY(-10px);
+border-color:#2EA8FF;
+box-shadow:0 20px 50px rgba(46,168,255,.18);
+}
+
+.why-icon{
+font-size:42px;
+margin-bottom:20px;
+}
+
+.why-card h3{
+margin-bottom:14px;
+font-size:1.3rem;
+}
+
+.why-card p{
+margin:0;
+}
+#stats{
+text-align:center;
+}
+
+.stats-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:24px;
+margin-top:40px;
+}
+
+.stat-card{
+background:rgba(14,26,47,.75);
+border:1px solid rgba(255,255,255,.08);
+border-radius:22px;
+padding:35px;
+backdrop-filter:blur(18px);
+transition:.35s;
+}
+
+.stat-card:hover{
+transform:translateY(-8px);
+border-color:#2EA8FF;
+box-shadow:0 18px 50px rgba(46,168,255,.18);
+}
+
+.stat-number{
+display:block;
+font-size:3rem;
+font-weight:800;
+color:#2EA8FF;
+margin-bottom:10px;
+}
+
+.stat-label{
+display:block;
+color:#bfd4ea;
+font-size:1rem;
+}
+#process{
+text-align:center;
+}
+
+.process-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:24px;
+margin-top:40px;
+}
+
+.process-card{
+background:rgba(14,26,47,.75);
+border:1px solid rgba(255,255,255,.08);
+border-radius:22px;
+padding:30px;
+transition:.35s;
+backdrop-filter:blur(18px);
+}
+
+.process-card:hover{
+transform:translateY(-8px);
+border-color:#2EA8FF;
+box-shadow:0 18px 50px rgba(46,168,255,.18);
+}
+
+.step{
+width:60px;
+height:60px;
+margin:0 auto 20px;
+border-radius:50%;
+background:linear-gradient(135deg,#2EA8FF,#157BFF);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:1.3rem;
+font-weight:700;
+color:#fff;
+}
+
+.process-card h3{
+margin-bottom:15px;
+}
+#partners{
+text-align:center;
+}
+
+.partners-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:24px;
+margin-top:40px;
+}
+
+.partner-card{
+background:rgba(14,26,47,.75);
+border:1px solid rgba(255,255,255,.08);
+border-radius:22px;
+padding:30px;
+transition:.35s;
+backdrop-filter:blur(18px);
+}
+
+.partner-card:hover{
+transform:translateY(-8px);
+border-color:#2EA8FF;
+box-shadow:0 18px 50px rgba(46,168,255,.18);
+}
+
+.partner-card h3{
+margin-bottom:15px;
+color:#2EA8FF;
+}
+#featured{
+text-align:center;
+}
+
+.featured-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:30px;
+margin-top:45px;
+}
+
+.featured-card{
+background:rgba(14,26,47,.75);
+border:1px solid rgba(255,255,255,.08);
+border-radius:22px;
+padding:35px;
+transition:.35s;
+backdrop-filter:blur(18px);
+}
+
+.featured-card:hover{
+transform:translateY(-10px);
+border-color:#2EA8FF;
+box-shadow:0 20px 60px rgba(46,168,255,.18);
+}
+
+.featured-card h3{
+margin-bottom:15px;
+color:#2EA8FF;
+}
+
+.featured-card a{
+display:inline-block;
+margin-top:20px;
+color:#2EA8FF;
+text-decoration:none;
+font-weight:700;
+transition:.3s;
+}
+
+.featured-card a:hover{
+color:#fff;
+}
+#faq{
+text-align:center;
+}
+
+.faq-container{
+margin-top:40px;
+display:grid;
+gap:20px;
+}
+
+.faq-item{
+background:rgba(14,26,47,.75);
+border:1px solid rgba(255,255,255,.08);
+border-radius:20px;
+padding:28px;
+text-align:left;
+transition:.35s;
+backdrop-filter:blur(18px);
+}
+
+.faq-item:hover{
+border-color:#2EA8FF;
+box-shadow:0 18px 50px rgba(46,168,255,.18);
+}
+
+.faq-item h3{
+margin-bottom:12px;
+color:#2EA8FF;
+}
+.contact-form{
+margin-top:40px;
+display:grid;
+gap:20px;
+max-width:700px;
+margin-left:auto;
+margin-right:auto;
+}
+
+.contact-form input,
+.contact-form select,
+.contact-form textarea{
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.08);
+border-radius:14px;
+padding:16px;
+color:#fff;
+font-family:inherit;
+font-size:16px;
+transition:.3s;
+}
+
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus{
+outline:none;
+border-color:#2EA8FF;
+box-shadow:0 0 20px rgba(46,168,255,.15);
+}
+
+.contact-form textarea{
+resize:vertical;
+min-height:160px;
+}
+
+.contact-form button{
+justify-self:center;
+margin-top:10px;
+cursor:pointer;
+}
+.trust-row{
+display:flex;
+gap:14px;
+margin-top:34px;
+flex-wrap:wrap;
+}
+
+.trust-pill{
+background:rgba(255,255,255,.05);
+border:1px solid rgba(46,168,255,.25);
+backdrop-filter:blur(18px);
+padding:10px 18px;
+border-radius:999px;
+font-size:.92rem;
+color:#dbeeff;
+}
+
+@keyframes floatPanel{
+
+0%{
+transform:translateY(0);
+}
+
+50%{
+transform:translateY(-6px);
+}
+
+100%{
+transform:translateY(0);
+}
+
+}
+
+footer{text-align:center;padding:40px;color:#89a7c6}
+@media(max-width:900px){.hero,.twocol{grid-template-columns:1fr}.links{display:none}}
+</style>
+</head>
+<body>
+<div class="bg"></div><canvas id="net"></canvas>
+<nav>
+<a href="#" class="brand">
+    <img src="imageslogo.png" alt="Intralink Technologies">
+</a>
+
+<div class="links">
+    <a href="#services">Services</a>
+    <a href="#solutions">Solutions</a>
+    <a href="#why">Why Us</a>
+    <a href="#contact">Contact</a>
+</div>
+</nav>
+
+<section class="hero">
+<div>
+<span class="badge">RESIDENTIAL • SMALL BUSINESS • NETWORK INFRASTRUCTURE</span>
+<h1>Secure.<br>Connected.<br>Intelligent.</h1>
+<p>Professional CCTV, Wi‑Fi and structured network solutions engineered for homes and small businesses. Clean installations, enterprise hardware and reliable performance.</p>
+<div class="btns">
+<a class="btn primary" href="#contact">Request a Quote</a>
+<a class="btn secondary" href="#services">Explore Services</a>
+</div>
+<div class="trust-row">
+
+<div class="trust-pill">
+✔ Professional Installations
+</div>
+
+<div class="trust-pill">
+✔ Enterprise Hardware
+</div>
+
+<div class="trust-pill">
+✔ Free Quotations
+</div>
+
+</div>
+</div>
+<div class="panel">
+<h3 style="font-size:1.55rem;margin-bottom:16px">Technology Expertise</h3>
+<div class="grid">
+<div class="card"><div class="icon">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+<path d="M2 8h10v8H2z"/>
+<path d="M12 10l6-3v10l-6-3"/>
+<path d="M5 16v3"/>
+<path d="M9 16v3"/>
+</svg>
+</div>CCTV</div>
+<div class="card"><div class="icon">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="M5 13a10 10 0 0 1 14 0"/>
+<path d="M8.5 16.5a5 5 0 0 1 7 0"/>
+<path d="M12 20h.01"/>
+<path d="M2 9a15 15 0 0 1 20 0"/>
+</svg>
+</div>Wi‑Fi</div>
+<div class="card"><div class="icon">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<circle cx="12" cy="12" r="10"/>
+<path d="M2 12h20"/>
+<path d="M12 2a15 15 0 0 1 0 20"/>
+<path d="M12 2a15 15 0 0 0 0 20"/>
+</svg>
+</div>Networking</div>
+<div class="card"><div class="icon">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<path d="M6 8V6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v2"/>
+<rect x="3" y="8" width="18" height="12" rx="2"/>
+<path d="M3 12h18"/>
+</svg>
+</div>Cat6</div>
+<div class="card"><div class="icon">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<rect x="7" y="3" width="10" height="18" rx="1"/>
+<path d="M7 9h10"/>
+<path d="M7 15h10"/>
+<circle cx="14" cy="6" r=".5"/>
+<circle cx="14" cy="12" r=".5"/>
+<circle cx="14" cy="18" r=".5"/>
+</svg>
+</div>Cabinets</div>
+<div class="card"><div class="icon">
+<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+<circle cx="12" cy="12" r="3"/>
+<path d="M19.4 15a1.7 1.7 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06A1.7 1.7 0 0 0 15 19.4a1.7 1.7 0 0 0-1 .6 1.7 1.7 0 0 0-.4 1V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-.4-1 1.7 1.7 0 0 0-1-.6 1.7 1.7 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06A1.7 1.7 0 0 0 4.6 15a1.7 1.7 0 0 0-.6-1 1.7 1.7 0 0 0-1-.4H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1-.4 1.7 1.7 0 0 0 .6-1 1.7 1.7 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.7 1.7 0 0 0 9 4.6a1.7 1.7 0 0 0 1-.6 1.7 1.7 0 0 0 .4-1V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 .4 1 1.7 1.7 0 0 0 1 .6 1.7 1.7 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06A1.7 1.7 0 0 0 19.4 9a1.7 1.7 0 0 0 .6 1 1.7 1.7 0 0 0 1 .4h.1a2 2 0 1 1 0 4H21a1.7 1.7 0 0 0-1 .4 1.7 1.7 0 0 0-.6 1z"/>
+</svg>
+</div>Configuration</div>
+</div>
+</div>
+</section>
+
+<section id="services">
+<h2>Services</h2>
+<p>Designed, installed and configured to professional standards.</p>
+<div class="grid">
+<div class="card"><h3>CCTV Systems</h3><p>IP surveillance, NVRs and remote viewing.</p></div>
+<div class="card"><h3>Enterprise Wi‑Fi</h3><p>Fast, seamless wireless coverage.</p></div>
+<div class="card"><h3>Networking</h3><p>Switches, routing and network design.</p></div>
+<div class="card"><h3>Structured Cabling</h3><p>Cat6, patch panels and testing.</p></div>
+<div class="card"><h3>Racks & Cabinets</h3><p>Professional rack builds and cable management.</p></div>
+<div class="card"><h3>Access Points</h3><p>Optimised wireless deployments.</p></div>
+<div class="card"><h3>Managed Switches</h3><p>PoE infrastructure and VLAN setup.</p></div>
+<div class="card"><h3>Software Configuration</h3><p>Complete commissioning and optimisation.</p></div>
+</div>
+</section>
+
+<section id="solutions" class="twocol">
+<div class="panel">
+<h2>Residential</h2>
+<ul>
+<li>Whole-home Wi‑Fi</li>
+<li>CCTV & Remote Viewing</li>
+<li>Garden Office Networking</li>
+<li>Smart Device Connectivity</li>
+</ul>
+</div>
+<div class="panel">
+<h2>Small Business</h2>
+<ul>
+<li>Office Networks</li>
+<li>Retail CCTV</li>
+<li>Structured Cabling</li>
+<li>Secure Wireless</li>
+<li>Ongoing Support</li>
+</ul>
+</div>
+</section>
+<section id="why">
+    <h2>Why Choose Intralink</h2>
+    <p>Delivering reliable technology solutions using enterprise-grade equipment, professional installation practices and expert configuration.</p>
+
+    <div class="why-grid">
+
+        <div class="why-card">
+            <div class="why-icon">🛡️</div>
+            <h3>Professional Installations</h3>
+            <p>Every installation is completed neatly, safely and to a high professional standard.</p>
+        </div>
+
+        <div class="why-card">
+            <div class="why-icon">⚡</div>
+            <h3>Enterprise Hardware</h3>
+            <p>We deploy trusted networking and surveillance equipment designed for reliability.</p>
+        </div>
+
+        <div class="why-card">
+            <div class="why-icon">🌐</div>
+            <h3>Complete Network Design</h3>
+            <p>From structured cabling to wireless optimisation, every network is designed correctly from the start.</p>
+        </div>
+
+        <div class="why-card">
+            <div class="why-icon">🤝</div>
+            <h3>Ongoing Support</h3>
+            <p>Installation is only the beginning. We continue to support, maintain and optimise your systems.</p>
+        </div>
+
+    </div>
+</section>
+<section id="stats">
+    <h2>Trusted Technology. Proven Results.</h2>
+    <p>Professional installations backed by quality workmanship and reliable infrastructure.</p>
+
+    <div class="stats-grid">
+
+        <div class="stat-card">
+            <span class="stat-number" data-target="250">0</span>
+            <span class="stat-label">Projects Completed</span>
+        </div>
+
+        <div class="stat-card">
+            <span class="stat-number" data-target="1200">0</span>
+            <span class="stat-label">Devices Installed</span>
+        </div>
+
+        <div class="stat-card">
+            <span class="stat-number" data-target="99.9">0</span>
+            <span class="stat-label">Network Reliability %</span>
+        </div>
+
+        <div class="stat-card">
+            <span class="stat-number" data-target="24">0</span>
+            <span class="stat-label">Hour Response Target</span>
+        </div>
+
+    </div>
+</section>
+<section id="process">
+    <h2>Our Process</h2>
+    <p>From consultation to completion, every project follows a proven process.</p>
+
+    <div class="process-grid">
+
+        <div class="process-card">
+            <div class="step">01</div>
+            <h3>Consultation</h3>
+            <p>We discuss your requirements and recommend the right solution.</p>
+        </div>
+
+        <div class="process-card">
+            <div class="step">02</div>
+            <h3>Site Survey</h3>
+            <p>We assess coverage, cabling routes and equipment placement.</p>
+        </div>
+
+        <div class="process-card">
+            <div class="step">03</div>
+            <h3>Installation</h3>
+            <p>Professional installation with clean cable management and testing.</p>
+        </div>
+
+        <div class="process-card">
+            <div class="step">04</div>
+            <h3>Configuration</h3>
+            <p>Networks, CCTV and devices are fully configured and optimised.</p>
+        </div>
+
+        <div class="process-card">
+            <div class="step">05</div>
+            <h3>Support</h3>
+            <p>Ongoing maintenance, upgrades and technical assistance when required.</p>
+        </div>
+
+    </div>
+</section>
+<section id="partners">
+    <h2>Technology We Work With</h2>
+    <p>Using trusted hardware from industry-leading manufacturers.</p>
+
+    <div class="partners-grid">
+
+        <div class="partner-card">
+            <h3>Hikvision</h3>
+            <p>Professional IP CCTV, NVRs and surveillance systems.</p>
+        </div>
+
+        <div class="partner-card">
+            <h3>Ubiquiti</h3>
+            <p>Enterprise Wi-Fi, switching and network infrastructure.</p>
+        </div>
+
+        <div class="partner-card">
+            <h3>TP-Link Omada</h3>
+            <p>Business networking and managed wireless deployments.</p>
+        </div>
+
+        <div class="partner-card">
+            <h3>DrayTek</h3>
+            <p>Reliable VPN routers and secure business connectivity.</p>
+        </div>
+
+        <div class="partner-card">
+            <h3>Cat6 Infrastructure</h3>
+            <p>Structured cabling, patch panels and network cabinets.</p>
+        </div>
+
+        <div class="partner-card">
+            <h3>Microsoft</h3>
+            <p>Network configuration, cloud integration and productivity solutions.</p>
+        </div>
+
+    </div>
+</section>
+<section id="featured">
+    <h2>Featured Solutions</h2>
+    <p>End-to-end technology solutions tailored for homes and small businesses.</p>
+
+    <div class="featured-grid">
+
+        <div class="featured-card">
+            <h3>CCTV Systems</h3>
+            <p>High-definition surveillance with remote viewing, AI detection and secure recording.</p>
+            <a href="#contact">Learn More →</a>
+        </div>
+
+        <div class="featured-card">
+            <h3>Business Wi-Fi</h3>
+            <p>Fast, seamless wireless coverage with secure roaming and professional optimisation.</p>
+            <a href="#contact">Learn More →</a>
+        </div>
+
+        <div class="featured-card">
+            <h3>Structured Cabling</h3>
+            <p>Cat6 installations, patch panels, racks and tidy cable management.</p>
+            <a href="#contact">Learn More →</a>
+        </div>
+
+    </div>
+</section>
+<section id="faq">
+    <h2>Frequently Asked Questions</h2>
+    <p>Answers to some of the questions we're asked most often.</p>
+
+    <div class="faq-container">
+
+        <div class="faq-item">
+            <h3>Do you provide free quotations?</h3>
+            <p>Yes. We offer free, no-obligation quotations for all residential and small business projects.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Can you improve my existing Wi-Fi?</h3>
+            <p>Absolutely. We can optimise, redesign or replace existing Wi-Fi networks to improve speed and coverage.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Can I view my CCTV remotely?</h3>
+            <p>Yes. We configure secure remote viewing on smartphones, tablets and computers.</p>
+        </div>
+
+        <div class="faq-item">
+            <h3>Do you supply the equipment?</h3>
+            <p>Yes. We can supply, install and configure all required equipment or work with customer-supplied hardware.</p>
+        </div>
+
+    </div>
+</section>
+<section class="cta panel" id="contact">
+
+<h2>Request a Free Quote</h2>
+
+<p>Tell us about your project and we'll get back to you as soon as possible.</p>
+
+<form class="contact-form">
+
+<input type="text" placeholder="Full Name" required>
+
+<input type="email" placeholder="Email Address" required>
+
+<input type="tel" placeholder="Phone Number">
+
+<select required>
+<option value="">Select a Service</option>
+<option>CCTV</option>
+<option>Wi-Fi</option>
+<option>Networking</option>
+<option>Structured Cabling</option>
+<option>Server Cabinets</option>
+<option>General Enquiry</option>
+</select>
+
+<textarea rows="6" placeholder="Tell us about your project..."></textarea>
+
+<button class="btn primary" type="submit">
+Request Quote
+</button>
+
+</form>
+
+</section>
+<footer>© 2026 Intralink Technologies</footer>
+
+<script>
+const c=document.getElementById("net"),x=c.getContext("2d");
+function rs(){c.width=innerWidth;c.height=innerHeight}rs();onresize=rs;
+const p=[...Array(70)].map(()=>({x:Math.random()*c.width,y:Math.random()*c.height,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35}));
+(function a(){x.clearRect(0,0,c.width,c.height);
+p.forEach(o=>{o.x+=o.vx;o.y+=o.vy;if(o.x<0||o.x>c.width)o.vx*=-1;if(o.y<0||o.y>c.height)o.vy*=-1;
+x.fillStyle="#2EA8FF";x.fillRect(o.x,o.y,2,2)});
+for(let i=0;i<p.length;i++)for(let j=i+1;j<p.length;j++){let dx=p[i].x-p[j].x,dy=p[i].y-p[j].y,d=Math.hypot(dx,dy);if(d<120){x.strokeStyle="rgba(46,168,255,"+(1-d/120)*.18+")";x.beginPath();x.moveTo(p[i].x,p[i].y);x.lineTo(p[j].x,p[j].y);x.stroke();}}
+requestAnimationFrame(a)})();
+const counters=document.querySelectorAll(".stat-number");
+
+const observer=new IntersectionObserver(entries=>{
+entries.forEach(entry=>{
+
+if(!entry.isIntersecting)return;
+
+const counter=entry.target;
+const target=parseFloat(counter.dataset.target);
+
+let current=0;
+const increment=target/80;
+
+function update(){
+
+current+=increment;
+
+if(current>=target){
+
+counter.textContent=target;
+
+}else{
+
+counter.textContent=target%1===0
+?Math.floor(current)
+:current.toFixed(1);
+
+requestAnimationFrame(update);
+
+}
+
+}
+
+update();
+
+observer.unobserve(counter);
+
+});
+});
+
+counters.forEach(counter=>observer.observe(counter));
+</script>
+</body></html>
