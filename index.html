@@ -802,15 +802,15 @@ footer{text-align:center;padding:40px;color:#89a7c6}
 
 <p>Tell us about your project and we'll get back to you as soon as possible.</p>
 
-<form class="contact-form">
+<form id="contactForm" class="contact-form">
 
-<input type="text" placeholder="Full Name" required>
+<input id="name" type="text" placeholder="Full Name" required>
 
-<input type="email" placeholder="Email Address" required>
+<input id="email" type="email" placeholder="Email Address" required>
 
-<input type="tel" placeholder="Phone Number">
+<input id="phone" type="tel" placeholder="Phone Number">
 
-<select required>
+<select id="service" required>
 <option value="">Select a Service</option>
 <option>CCTV</option>
 <option>Wi-Fi</option>
@@ -820,7 +820,7 @@ footer{text-align:center;padding:40px;color:#89a7c6}
 <option>General Enquiry</option>
 </select>
 
-<textarea rows="6" placeholder="Tell us about your project..."></textarea>
+<textarea id="message" rows="6" placeholder="Tell us about your project..."></textarea>
 
 <button class="btn primary" type="submit">
 Request Quote
@@ -881,5 +881,46 @@ observer.unobserve(counter);
 });
 
 counters.forEach(counter=>observer.observe(counter));
+    const contactForm = document.getElementById("contactForm");
+
+contactForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const button = contactForm.querySelector("button");
+    button.disabled = true;
+    button.textContent = "Sending...";
+
+    const data = {
+        name: document.getElementById("name").value,
+        email: document.getElementById("email").value,
+        phone: document.getElementById("phone").value,
+        service: document.getElementById("service").value,
+        message: document.getElementById("message").value
+    };
+
+    try {
+        const response = await fetch("/api/contact", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (response.ok) {
+            alert("Thank you! Your enquiry has been sent.");
+            contactForm.reset();
+        } else {
+            alert(result.error || "Something went wrong.");
+        }
+    } catch (err) {
+        alert("Unable to send your enquiry. Please try again.");
+    }
+
+    button.disabled = false;
+    button.textContent = "Request Quote";
+});
 </script>
 </body></html>
