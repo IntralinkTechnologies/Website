@@ -51,46 +51,41 @@ export async function onRequestPost(context) {
 
           <hr>
 
-          <p>${message.replace(/\n/g,"<br>")}</p>
+          <p>${message.replace(/\n/g, "<br>")}</p>
         `
       })
     });
 
     if (!response.ok) {
-
       const error = await response.text();
 
-      return new Response(error,{
-        status:500
+      return new Response(error, {
+        status: 500
       });
-
     }
 
     return new Response(
       JSON.stringify({
-        success:true
+        success: true
       }),
       {
-        headers:{
-          "Content-Type":"application/json"
+        headers: {
+          "Content-Type": "application/json"
         }
       }
     );
-
-  } catch(err){
-
+  } catch (err) {
     return new Response(
       JSON.stringify({
-        success:false,
-        error:err.message
+        success: false,
+        error: err.message
       }),
       {
-        status:500,
-        headers:{
-          "Content-Type":"application/json"
+        status: 500,
+        headers: {
+          "Content-Type": "application/json"
         }
       }
     );
-
   }
 }
