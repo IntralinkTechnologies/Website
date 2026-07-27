@@ -590,6 +590,7 @@ ul {
 .schematic-panel {
   padding: 30px 30px 34px;
   position: relative;
+  isolation: isolate;
   overflow: hidden;
   background:
     linear-gradient(180deg, rgba(8, 13, 24, 0.94), rgba(6, 10, 18, 0.96));
@@ -598,14 +599,21 @@ ul {
 .schematic-panel::after {
   content: "";
   position: absolute;
-  right: -58px;
-  top: 32px;
-  width: 132px;
-  height: 220px;
-  background: linear-gradient(90deg, rgba(111, 164, 255, 0.04), rgba(111, 164, 255, 0.18));
-  clip-path: polygon(42% 0, 100% 0, 58% 100%, 0 100%);
+  right: -34px;
+  top: 26px;
+  width: 96px;
+  height: 236px;
+  background: linear-gradient(90deg, rgba(111, 164, 255, 0.02), rgba(111, 164, 255, 0.14));
+  clip-path: polygon(72% 0, 100% 0, 56% 100%, 28% 100%);
   border-left: 1px solid rgba(111, 164, 255, 0.28);
-  opacity: 0.9;
+  opacity: 0.82;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.schematic-panel > * {
+  position: relative;
+  z-index: 1;
 }
 
 .expertise-list {
