@@ -179,7 +179,7 @@ nav {
 }
 
 .hero {
-  min-height: 100vh;
+  min-height: auto;
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
   align-items: center;
@@ -189,6 +189,7 @@ nav {
   position: relative;
   overflow: hidden;
   padding-top: 114px;
+  padding-bottom: 72px;
 }
 
 .hero::before {
@@ -205,8 +206,11 @@ nav {
 }
 
 .page-hero {
-  min-height: 52vh;
-  padding-bottom: 45px;
+  min-height: auto;
+  align-items: end;
+  gap: 24px;
+  padding-top: 152px;
+  padding-bottom: 24px;
   grid-template-columns: 1fr;
 }
 
@@ -844,10 +848,13 @@ footer a {
 
   .hero {
     padding-top: 135px;
+    padding-bottom: 52px;
   }
 
   .page-hero {
-    min-height: 45vh;
+    min-height: auto;
+    padding-top: 140px;
+    padding-bottom: 18px;
   }
 
   .cta {
