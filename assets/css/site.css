@@ -565,6 +565,16 @@ ul {
   text-transform: uppercase;
 }
 
+.text-link {
+  color: var(--blue-light);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.text-link:hover {
+  text-decoration: underline;
+}
+
 .section-kicker {
   display: flex;
   align-items: center;

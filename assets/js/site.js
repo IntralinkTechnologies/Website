@@ -144,6 +144,6 @@ if (form) {
     }
 
     button.disabled = false;
-    button.textContent = "Request Quote";
+    button.textContent = "Send Enquiry";
   });
 }
