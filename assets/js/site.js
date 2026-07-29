@@ -52,7 +52,7 @@ if (c) {
 
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const revealTargets = document.querySelectorAll(
-  "main>section:not(.hero),.hero>div,.grid>*,.why-grid>*,.stats-grid>*,.process-grid>*,.partners-grid>*,.featured-grid>*,.faq-container>*"
+  "main>section:not(.hero),.hero>div,.grid>*,.why-grid>*,.stats-grid>*,.process-grid>*,.partners-grid>*,.featured-grid>*,.service-showcase-grid>*,.faq-container>*"
 );
 
 if (!reduceMotion && "IntersectionObserver" in window) {
