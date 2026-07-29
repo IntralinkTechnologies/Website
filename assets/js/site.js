@@ -55,6 +55,31 @@ const revealTargets = document.querySelectorAll(
   "main>section:not(.hero),.hero>div,.grid>*,.why-grid>*,.stats-grid>*,.process-grid>*,.partners-grid>*,.featured-grid>*,.service-showcase-grid>*,.faq-container>*"
 );
 
+const navDropdowns = document.querySelectorAll(".nav-dropdown");
+
+if (navDropdowns.length) {
+  navDropdowns.forEach((dropdown) => {
+    dropdown.addEventListener("toggle", () => {
+      if (!dropdown.open) return;
+
+      navDropdowns.forEach((other) => {
+        if (other !== dropdown) other.removeAttribute("open");
+      });
+    });
+  });
+
+  document.addEventListener("click", (event) => {
+    navDropdowns.forEach((dropdown) => {
+      if (!dropdown.contains(event.target)) dropdown.removeAttribute("open");
+    });
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key !== "Escape") return;
+    navDropdowns.forEach((dropdown) => dropdown.removeAttribute("open"));
+  });
+}
+
 if (!reduceMotion && "IntersectionObserver" in window) {
   const revealObserver = new IntersectionObserver(
     (entries) =>
