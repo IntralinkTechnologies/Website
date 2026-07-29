@@ -108,8 +108,8 @@ nav {
   align-items: center;
   justify-content: flex-start;
   flex-shrink: 0;
-  min-height: 50px;
-  padding: 0 8px 0 0;
+  min-height: 52px;
+  padding: 0 6px 0 0;
   margin-right: auto;
   line-height: 0;
   text-decoration: none;
@@ -117,15 +117,15 @@ nav {
 }
 
 .brand img {
-  height: 46px;
+  height: 50px;
   width: auto;
-  max-width: min(280px, 40vw);
+  max-width: min(260px, 34vw);
   display: block;
   object-fit: contain;
   object-position: left center;
   opacity: 1;
   image-rendering: -webkit-optimize-contrast;
-  transform: translateY(-1px);
+  transform: none;
   filter:
     drop-shadow(0 0 1px rgba(255, 255, 255, 0.06))
     drop-shadow(0 10px 24px rgba(20, 109, 255, 0.12));
@@ -407,7 +407,7 @@ p {
 section {
   width: min(1180px, 94%);
   margin: auto;
-  padding: 104px 0;
+  padding: 80px 0;
   position: relative;
 }
 
@@ -1027,13 +1027,13 @@ footer a {
   }
 
   .brand {
-    min-height: 40px;
-    padding: 0 4px 0 0;
+    min-height: 36px;
+    padding: 0 2px 0 0;
   }
 
   .brand img {
-    height: 36px;
-    max-width: 50vw;
+    height: 34px;
+    max-width: 44vw;
   }
 
   .links {
@@ -1094,7 +1094,7 @@ footer a {
   }
 
   section {
-    padding: 82px 0;
+    padding: 68px 0;
   }
 
   .grid,
