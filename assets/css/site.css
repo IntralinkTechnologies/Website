@@ -728,15 +728,38 @@ ul {
   display: flex;
   flex-direction: column;
   position: relative;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
   background:
     linear-gradient(180deg, rgba(12, 22, 40, 0.92), rgba(7, 12, 22, 0.97));
-  transition: background 0.28s ease, box-shadow 0.28s ease;
+  transition: background 0.28s ease, box-shadow 0.28s ease, transform 0.28s ease;
 }
 
 .service-showcase-card:hover {
+  z-index: 1;
+  transform: translateY(-2px);
   background:
     linear-gradient(180deg, rgba(15, 27, 50, 0.95), rgba(8, 14, 26, 0.98));
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  box-shadow:
+    inset 0 0 0 1px rgba(111, 164, 255, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 12px 28px rgba(0, 0, 0, 0.16);
+}
+
+.service-showcase-card:focus-visible {
+  z-index: 2;
+  outline: 2px solid #78aaff;
+  outline-offset: -4px;
+  background:
+    linear-gradient(180deg, rgba(16, 30, 55, 0.97), rgba(8, 15, 28, 0.99));
+  box-shadow: inset 0 0 0 1px rgba(180, 211, 255, 0.25);
+}
+
+.service-showcase-card:active {
+  transform: translateY(0);
+  background:
+    linear-gradient(180deg, rgba(18, 32, 58, 0.98), rgba(9, 16, 30, 0.99));
 }
 
 .service-showcase-top {

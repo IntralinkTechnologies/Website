@@ -35,7 +35,7 @@ export async function onRequestPost(context) {
       },
       body: JSON.stringify({
         from: "Intralink Tech Website <website@intralinktechnologies.co.uk>",
-        to: ["info@intralinktechnologies.co.uk"],
+        to: ["info@intralinktech.co.uk"],
         subject: `New Website Enquiry - ${service}`,
         reply_to: email,
         html: `
