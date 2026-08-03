@@ -980,21 +980,127 @@ ul {
   color: #dbeeff;
 }
 
-footer {
-  text-align: center;
-  padding: 42px 20px;
-  color: #75849f;
+.site-footer {
+  position: relative;
+  padding: 58px max(5%, 24px) 24px;
+  color: #8fa2ba;
   border-top: 1px solid var(--line);
-  font-size: 0.82rem;
-  letter-spacing: 0.06em;
+  background: linear-gradient(180deg, rgba(7, 18, 31, 0.56), rgba(5, 14, 26, 0.94));
+}
+
+.footer-inner {
+  width: min(1180px, 100%);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) repeat(2, minmax(150px, 0.65fr));
+  gap: clamp(36px, 6vw, 88px);
+  align-items: start;
+}
+
+.footer-brand-block {
+  max-width: 390px;
+}
+
+.footer-brand {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.footer-brand img {
+  display: block;
+  width: min(300px, 100%);
+  height: auto;
+}
+
+.footer-brand-block p {
+  margin: 0;
+  color: #c3d1e2;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.footer-brand-block .footer-coverage {
+  margin-top: 8px;
+  color: #6fa4ff;
+  font-size: 0.84rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
-footer a {
-  color: #a9bfd7;
-  text-decoration: none;
-  margin: 0 8px;
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.footer-column h2 {
+  margin: 0 0 9px;
+  color: #eef6ff;
   font-size: 0.78rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.site-footer a {
+  color: #9fb2ca;
+  text-decoration: none;
+  font-size: 0.9rem;
+  line-height: 1.45;
+  transition: color 0.2s ease;
+}
+
+.site-footer a:hover,
+.site-footer a:focus-visible {
+  color: #6fa4ff;
+}
+
+.footer-bottom {
+  width: min(1180px, 100%);
+  margin: 44px auto 0;
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  border-top: 1px solid rgba(111, 164, 255, 0.14);
+  color: #687a92;
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.footer-bottom a {
+  color: #bfd5ef;
+  font-size: inherit;
+  font-weight: 700;
+}
+
+@media (max-width: 720px) {
+  .site-footer {
+    padding-top: 46px;
+  }
+
+  .footer-inner {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 38px 28px;
+  }
+
+  .footer-brand-block {
+    grid-column: 1 / -1;
+  }
+
+  .footer-brand img {
+    width: min(270px, 84vw);
+  }
+
+  .footer-bottom {
+    margin-top: 36px;
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }
 
 @keyframes floatPanel {
