@@ -55,7 +55,8 @@ const revealTargets = document.querySelectorAll(
   "main>section:not(.hero),.hero>div,.grid>*,.why-grid>*,.stats-grid>*,.process-grid>*,.partners-grid>*,.featured-grid>*,.service-showcase-grid>*,.faq-container>*"
 );
 
-const navDropdowns = document.querySelectorAll(".nav-dropdown");
+const mainNav = document.querySelector('body > nav[aria-label="Main navigation"]');
+const navDropdowns = mainNav?.querySelectorAll(".nav-dropdown") ?? [];
 
 if (navDropdowns.length) {
   navDropdowns.forEach((dropdown) => {
@@ -73,11 +74,122 @@ if (navDropdowns.length) {
       if (!dropdown.contains(event.target)) dropdown.removeAttribute("open");
     });
   });
+}
+
+const navLinks = mainNav?.querySelector(".links");
+const navBrand = mainNav?.querySelector(".brand");
+
+if (mainNav && navLinks && navBrand) {
+  const mobileNavMedia = matchMedia("(max-width: 900px)");
+  const navToggle = document.createElement("button");
+  const navToggleLabel = document.createElement("span");
+  const navToggleIcon = document.createElement("span");
+
+  navLinks.id ||= "primary-navigation";
+
+  navToggle.type = "button";
+  navToggle.className = "nav-toggle";
+  navToggle.setAttribute("aria-controls", navLinks.id);
+  navToggle.setAttribute("aria-expanded", "false");
+  navToggle.setAttribute("aria-label", "Open navigation menu");
+
+  navToggleLabel.className = "nav-toggle-label";
+  navToggleLabel.textContent = "Menu";
+
+  navToggleIcon.className = "nav-toggle-icon";
+  navToggleIcon.setAttribute("aria-hidden", "true");
+  navToggleIcon.append(
+    document.createElement("span"),
+    document.createElement("span")
+  );
+  navToggle.append(navToggleLabel, navToggleIcon);
+
+  navBrand.after(navToggle);
+  mainNav.classList.add("nav-enhanced");
+
+  const setMobileNavOpen = (isOpen, restoreFocus = false) => {
+    mainNav.classList.toggle("nav-open", isOpen);
+    navToggle.setAttribute("aria-expanded", String(isOpen));
+    navToggle.setAttribute(
+      "aria-label",
+      isOpen ? "Close navigation menu" : "Open navigation menu"
+    );
+    navToggleLabel.textContent = isOpen ? "Close" : "Menu";
+
+    if (mobileNavMedia.matches) {
+      navLinks.hidden = !isOpen;
+    } else {
+      navLinks.hidden = false;
+    }
+
+    if (!isOpen) {
+      navDropdowns.forEach((dropdown) => dropdown.removeAttribute("open"));
+      if (restoreFocus) navToggle.focus();
+    }
+  };
+
+  const syncMobileNav = () => {
+    if (mobileNavMedia.matches) {
+      navToggle.hidden = false;
+      if (navLinks.contains(document.activeElement)) navToggle.focus();
+      setMobileNavOpen(false);
+      return;
+    }
+
+    if (document.activeElement === navToggle) navBrand.focus();
+    navToggle.hidden = true;
+    setMobileNavOpen(false);
+  };
+
+  navToggle.addEventListener("click", () => {
+    setMobileNavOpen(navToggle.getAttribute("aria-expanded") !== "true");
+  });
+
+  navLinks.addEventListener("click", (event) => {
+    if (
+      mobileNavMedia.matches &&
+      event.target instanceof Element &&
+      event.target.closest("a")
+    ) {
+      setMobileNavOpen(false);
+    }
+  });
+
+  document.addEventListener("click", (event) => {
+    if (
+      mobileNavMedia.matches &&
+      mainNav.classList.contains("nav-open") &&
+      !mainNav.contains(event.target)
+    ) {
+      setMobileNavOpen(false);
+    }
+  });
 
   document.addEventListener("keydown", (event) => {
     if (event.key !== "Escape") return;
-    navDropdowns.forEach((dropdown) => dropdown.removeAttribute("open"));
+
+    const openDropdown = [...navDropdowns].find((dropdown) => dropdown.open);
+
+    if (openDropdown) {
+      event.preventDefault();
+      openDropdown.removeAttribute("open");
+      openDropdown.querySelector("summary")?.focus();
+      return;
+    }
+
+    if (mainNav.classList.contains("nav-open")) {
+      event.preventDefault();
+      setMobileNavOpen(false, true);
+    }
   });
+
+  if (typeof mobileNavMedia.addEventListener === "function") {
+    mobileNavMedia.addEventListener("change", syncMobileNav);
+  } else {
+    mobileNavMedia.addListener(syncMobileNav);
+  }
+
+  syncMobileNav();
 }
 
 if (!reduceMotion && "IntersectionObserver" in window) {
