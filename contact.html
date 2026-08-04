@@ -84,7 +84,7 @@
     <section class="cta panel">
       <h2>Send an Enquiry</h2>
 
-      <form id="contactForm" class="contact-form" novalidate>
+      <form id="contactForm" class="contact-form" aria-describedby="formPrivacy" novalidate>
         <label for="name">Full name</label>
         <input id="name" name="name" type="text" autocomplete="name" required>
 
@@ -108,6 +108,11 @@
 
         <label for="message">Tell us about your project</label>
         <textarea id="message" name="message" rows="6" required></textarea>
+
+        <p id="formPrivacy" class="form-privacy">
+          We use the information you provide to respond to your enquiry and, where requested, prepare a quotation or provide support.
+          Read our <a class="text-link" href="privacy.html">Privacy Notice</a> for full details.
+        </p>
 
         <button class="btn primary" type="submit">Send Enquiry</button>
       </form>
@@ -178,7 +183,10 @@
 
     <div class="footer-bottom">
       <span>&copy; 2026 Intralink Tech</span>
-      <a href="contact.html">Request a Quote</a>
+      <div class="footer-meta-links">
+        <a href="privacy.html">Privacy Notice</a>
+        <a href="contact.html">Request a Quote</a>
+      </div>
     </div>
   </footer>
 
