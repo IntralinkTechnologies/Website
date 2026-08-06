@@ -27,7 +27,7 @@
   >
   <link rel="stylesheet" href="assets/css/site.css">
 </head>
-<body>
+<body class="contact-page">
   <div class="bg"></div>
   <canvas id="net" aria-hidden="true"></canvas>
 
@@ -64,50 +64,53 @@
       </div>
     </section>
 
-    <section>
+      <section class="contact-details section-compact">
       <h2>Contact Details</h2>
       <p>Use the email address below or send an enquiry using the form for project enquiries, support requests and general questions.</p>
 
-      <div class="grid">
-        <article class="card">
+        <div class="contact-email-row">
           <h3>Email</h3>
           <p>Send project and support enquiries to <a class="text-link" href="mailto:info@intralinktech.co.uk">info@intralinktech.co.uk</a>.</p>
-        </article>
+        </div>
+      </section>
 
-        <article class="card">
-          <h3>Enquiry Form</h3>
-          <p>Use the form below to request a quote, ask a question or tell us about an existing issue.</p>
-        </article>
-      </div>
-    </section>
+      <section class="contact-form-section" aria-labelledby="enquiry-heading">
+        <h2 id="enquiry-heading">Send an Enquiry</h2>
 
-    <section class="cta panel">
-      <h2>Send an Enquiry</h2>
+        <form id="contactForm" class="contact-form" aria-describedby="formPrivacy" novalidate>
+          <div class="form-field">
+            <label for="name">Full name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required>
+          </div>
 
-      <form id="contactForm" class="contact-form" aria-describedby="formPrivacy" novalidate>
-        <label for="name">Full name</label>
-        <input id="name" name="name" type="text" autocomplete="name" required>
+          <div class="form-field">
+            <label for="email">Email address</label>
+            <input id="email" name="email" type="email" autocomplete="email" required>
+          </div>
 
-        <label for="email">Email address</label>
-        <input id="email" name="email" type="email" autocomplete="email" required>
+          <div class="form-field">
+            <label for="phone">Phone number <span>(optional)</span></label>
+            <input id="phone" name="phone" type="tel" autocomplete="tel">
+          </div>
 
-        <label for="phone">Phone number <span>(optional)</span></label>
-        <input id="phone" name="phone" type="tel" autocomplete="tel">
+          <div class="form-field">
+            <label for="service">Service required</label>
+            <select id="service" name="service" required>
+              <option value="">Select a service</option>
+              <option>CCTV Installs</option>
+              <option>Wi-Fi Installs</option>
+              <option>Networking</option>
+              <option>Rack &amp; Cabinet Builds</option>
+              <option>Microsoft 365 Administration</option>
+              <option>IT Support</option>
+              <option>General Enquiry</option>
+            </select>
+          </div>
 
-        <label for="service">Service required</label>
-        <select id="service" name="service" required>
-          <option value="">Select a service</option>
-          <option>CCTV Installs</option>
-          <option>Wi-Fi Installs</option>
-          <option>Networking</option>
-          <option>Rack &amp; Cabinet Builds</option>
-          <option>Microsoft 365 Administration</option>
-          <option>IT Support</option>
-          <option>General Enquiry</option>
-        </select>
-
-        <label for="message">Tell us about your project</label>
-        <textarea id="message" name="message" rows="6" required></textarea>
+          <div class="form-field">
+            <label for="message">Tell us about your project</label>
+            <textarea id="message" name="message" rows="6" required></textarea>
+          </div>
 
         <p id="formPrivacy" class="form-privacy">
           We use the information you provide to respond to your enquiry and, where requested, prepare a quotation or provide support.
@@ -123,30 +126,30 @@
       <p>Clear answers to some of the questions we are asked most often.</p>
 
       <div class="faq-container">
-        <article class="faq-item">
-          <h3>Do you provide free quotations?</h3>
-          <p>Yes. We provide clear, no-obligation quotations for homes, home offices and business premises.</p>
-        </article>
+          <details class="faq-item">
+            <summary>Do you provide free quotations?</summary>
+            <div class="faq-answer"><p>Yes. We provide clear, no-obligation quotations for homes, home offices and business premises.</p></div>
+          </details>
 
-        <article class="faq-item">
-          <h3>Can you improve existing Wi-Fi?</h3>
-          <p>Yes. We can improve existing coverage, replace outdated equipment or redesign the setup where needed.</p>
-        </article>
+          <details class="faq-item">
+            <summary>Can you improve existing Wi-Fi?</summary>
+            <div class="faq-answer"><p>Yes. We can improve existing coverage, replace outdated equipment or redesign the setup where needed.</p></div>
+          </details>
 
-        <article class="faq-item">
-          <h3>Do you supply the equipment?</h3>
-          <p>Yes. We can supply and install the required equipment, or work with hardware you already have.</p>
-        </article>
+          <details class="faq-item">
+            <summary>Do you supply the equipment?</summary>
+            <div class="faq-answer"><p>Yes. We can supply and install the required equipment, or work with hardware you already have.</p></div>
+          </details>
 
-        <article class="faq-item">
-          <h3>Do you provide ongoing support?</h3>
-          <p>Yes. Ongoing support is available for troubleshooting, changes, upgrades and day-to-day issues.</p>
-        </article>
+          <details class="faq-item">
+            <summary>Do you provide ongoing support?</summary>
+            <div class="faq-answer"><p>Yes. Ongoing support is available for troubleshooting, changes, upgrades and day-to-day issues.</p></div>
+          </details>
 
-        <article class="faq-item">
-          <h3>Can you set up Microsoft 365 as well?</h3>
-          <p>Yes. We can help with Microsoft 365 setup, administration and day-to-day support.</p>
-        </article>
+          <details class="faq-item">
+            <summary>Can you set up Microsoft 365 as well?</summary>
+            <div class="faq-answer"><p>Yes. We can help with Microsoft 365 setup, administration and day-to-day support.</p></div>
+          </details>
       </div>
     </section>
   </main>

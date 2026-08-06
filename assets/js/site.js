@@ -1,58 +1,73 @@
+const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const c = document.getElementById("net");
 
 if (c) {
   const x = c.getContext("2d");
+  let particles = [];
+
+  const canvasSettings = () => {
+    if (innerWidth <= 560) return { count: 24, distance: 76, lineAlpha: 0.06, nodeAlpha: 0.42 };
+    if (innerWidth <= 900) return { count: 36, distance: 92, lineAlpha: 0.08, nodeAlpha: 0.55 };
+    return { count: 70, distance: 120, lineAlpha: 0.16, nodeAlpha: 0.88 };
+  };
+
+  const createParticles = () => {
+    const { count } = canvasSettings();
+    particles = [...Array(count)].map(() => ({
+      x: Math.random() * c.width,
+      y: Math.random() * c.height,
+      vx: (Math.random() - 0.5) * (reduceMotion ? 0 : 0.3),
+      vy: (Math.random() - 0.5) * (reduceMotion ? 0 : 0.3)
+    }));
+  };
 
   function rs() {
     c.width = innerWidth;
     c.height = innerHeight;
+    createParticles();
   }
 
   rs();
   addEventListener("resize", rs);
 
-  const p = [...Array(70)].map(() => ({
-    x: Math.random() * c.width,
-    y: Math.random() * c.height,
-    vx: (Math.random() - 0.5) * 0.35,
-    vy: (Math.random() - 0.5) * 0.35
-  }));
-
   (function a() {
     x.clearRect(0, 0, c.width, c.height);
+    const { distance, lineAlpha, nodeAlpha } = canvasSettings();
 
-    p.forEach((o) => {
+    particles.forEach((o) => {
       o.x += o.vx;
       o.y += o.vy;
 
       if (o.x < 0 || o.x > c.width) o.vx *= -1;
       if (o.y < 0 || o.y > c.height) o.vy *= -1;
 
-      x.fillStyle = "#2EA8FF";
+      x.fillStyle = `rgba(46,168,255,${nodeAlpha})`;
       x.fillRect(o.x, o.y, 2, 2);
     });
 
-    for (let i = 0; i < p.length; i++) {
-      for (let j = i + 1; j < p.length; j++) {
-        const d = Math.hypot(p[i].x - p[j].x, p[i].y - p[j].y);
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const d = Math.hypot(
+          particles[i].x - particles[j].x,
+          particles[i].y - particles[j].y
+        );
 
-        if (d < 120) {
-          x.strokeStyle = `rgba(46,168,255,${(1 - d / 120) * 0.18})`;
+        if (d < distance) {
+          x.strokeStyle = `rgba(46,168,255,${(1 - d / distance) * lineAlpha})`;
           x.beginPath();
-          x.moveTo(p[i].x, p[i].y);
-          x.lineTo(p[j].x, p[j].y);
+          x.moveTo(particles[i].x, particles[i].y);
+          x.lineTo(particles[j].x, particles[j].y);
           x.stroke();
         }
       }
     }
 
-    requestAnimationFrame(a);
+    if (!reduceMotion) requestAnimationFrame(a);
   })();
 }
 
-const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const revealTargets = document.querySelectorAll(
-  "main>section:not(.hero),.hero>div,.grid>*,.why-grid>*,.stats-grid>*,.process-grid>*,.partners-grid>*,.featured-grid>*,.service-showcase-grid>*,.faq-container>*"
+  "main>section:not(.hero),.hero>div,.grid>*,.why-grid>*,.stats-grid>*,.process-grid>*,.partners-grid>*,.featured-grid>*,.service-showcase-grid>*,.editorial-media-grid>*,.process-timeline>*,.use-case-list>*,.solution-bands>*,.technology-list>*,.faq-container>*"
 );
 
 const mainNav = document.querySelector('body > nav[aria-label="Main navigation"]');
@@ -206,7 +221,7 @@ if (!reduceMotion && "IntersectionObserver" in window) {
         });
       }),
     {
-      threshold: 0.15,
+      threshold: 0.05,
       rootMargin: "0px 0px -40px"
     }
   );
