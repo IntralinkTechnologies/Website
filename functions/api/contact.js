@@ -9,8 +9,22 @@ export async function onRequestPost(context) {
       email,
       phone,
       service,
-      message
+      message,
+      website
     } = data;
+
+    if (website) {
+      return new Response(
+        JSON.stringify({
+          success: true
+        }),
+        {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+      );
+    }
 
     if (!name || !email || !message) {
       return new Response(
