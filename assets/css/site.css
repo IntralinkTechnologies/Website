@@ -481,10 +481,6 @@ p {
 
 .card,
 .why-card,
-.stat-card,
-.process-card,
-.partner-card,
-.featured-card,
 .faq-item {
   background: transparent;
   backdrop-filter: none;
@@ -582,9 +578,6 @@ h3 {
 
 .card h3 + p,
 .why-card h3 + p,
-.featured-card h3 + p,
-.partner-card h3 + p,
-.process-card h3 + p,
 .panel h3 + p {
   margin-top: 10px;
 }
@@ -596,11 +589,7 @@ section > p + p,
 }
 
 .grid,
-.why-grid,
-.stats-grid,
-.process-grid,
-.partners-grid,
-.featured-grid {
+.why-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 24px;
@@ -611,17 +600,8 @@ section > p + p,
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
-.process-grid {
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 16px;
-}
-
 .card,
 .why-card,
-.stat-card,
-.process-card,
-.partner-card,
-.featured-card,
 .faq-item {
   padding: 28px;
   position: relative;
@@ -648,9 +628,7 @@ section > p + p,
 }
 
 .about-page .why-card,
-.services-page .card,
-.services-page .featured-card,
-.services-page .partner-card {
+.services-page .card {
   background:
     linear-gradient(180deg, rgba(14, 25, 46, 0.56), rgba(8, 12, 23, 0.86));
   backdrop-filter: blur(18px);
@@ -668,10 +646,7 @@ section > p + p,
 
 .about-page .why-card:hover,
 .services-page .card:hover,
-.services-page .featured-card:hover,
-.services-page .partner-card:hover,
-.services-page .card:focus-within,
-.services-page .featured-card:focus-within {
+.services-page .card:focus-within {
   transform: translateY(-4px);
   border-color: rgba(111, 164, 255, 0.22);
   box-shadow:
@@ -680,8 +655,6 @@ section > p + p,
 }
 
 .about-page .why-card::before,
-.services-page .featured-card::before,
-.services-page .partner-card::before,
 .services-page .card::before {
   content: "";
   position: absolute;
@@ -699,9 +672,7 @@ section > p + p,
 }
 
 .about-page .why-card::after,
-.services-page .card::after,
-.services-page .featured-card::after,
-.services-page .partner-card::after {
+.services-page .card::after {
   content: "";
   position: absolute;
   top: 0;
@@ -856,21 +827,6 @@ ul {
   stroke-linejoin: round;
 }
 
-.stat-number {
-  display: block;
-  font-size: 3rem;
-  font-weight: 800;
-  color: var(--blue-light);
-  margin-bottom: 10px;
-}
-
-.stat-label {
-  color: var(--muted-soft);
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-}
-
 .step {
   width: 60px;
   height: 60px;
@@ -885,28 +841,8 @@ ul {
   clip-path: polygon(10px 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%, 0 10px);
 }
 
-.process-card,
-.stats-grid,
-.featured-grid,
-.partners-grid {
-  text-align: center;
-}
-
-.partner-card h3,
-.featured-card h3,
 .faq-item h3 {
   color: var(--blue-light);
-}
-
-.featured-card a {
-  display: inline-block;
-  margin-top: 20px;
-  color: var(--blue-light);
-  text-decoration: none;
-  font-weight: 700;
-  font-size: 0.82rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
 }
 
 .text-link {
@@ -1046,12 +982,6 @@ ul {
   stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
-}
-
-.service-showcase-number {
-  color: rgba(111, 164, 255, 0.52);
-  font-size: 0.72rem;
-  letter-spacing: 0.12em;
 }
 
 .service-showcase-kicker {
@@ -1310,6 +1240,29 @@ ul {
   border-top: 1px solid rgba(111, 164, 255, 0.2);
 }
 
+.proof-stat {
+  display: flex;
+  align-items: baseline;
+  gap: 14px;
+  margin: 20px 0 4px;
+}
+
+.proof-stat-figure {
+  font-size: clamp(2.1rem, 3.6vw, 2.8rem);
+  font-weight: 800;
+  color: var(--blue-light);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+.proof-stat-label {
+  max-width: 20ch;
+  color: var(--muted-soft);
+  font-size: 0.82rem;
+  font-weight: 600;
+  line-height: 1.4;
+}
+
 .about-experience-copy p {
   max-width: 720px;
   padding-top: 18px;
@@ -1400,11 +1353,20 @@ ul {
   background: linear-gradient(90deg, rgba(47, 111, 237, 0.055), transparent 72%);
 }
 
-.solution-number {
-  color: rgba(111, 164, 255, 0.58);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+.solution-icon {
+  width: 22px;
+  height: 22px;
+  color: var(--blue-light);
+}
+
+.solution-icon svg {
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 .solution-band p {
@@ -1818,24 +1780,6 @@ ul {
   }
 }
 
-@media (max-width: 1100px) {
-  .process-grid {
-    grid-template-columns: repeat(6, minmax(0, 1fr));
-  }
-
-  .process-grid .process-card {
-    grid-column: span 2;
-  }
-
-  .process-grid .process-card:nth-child(4) {
-    grid-column: 2 / span 2;
-  }
-
-  .process-grid .process-card:nth-child(5) {
-    grid-column: 4 / span 2;
-  }
-}
-
 @media (max-width: 900px) {
   .bg {
     opacity: 0.72;
@@ -2029,11 +1973,7 @@ ul {
   }
 
   .grid,
-  .why-grid,
-  .stats-grid,
-  .process-grid,
-  .partners-grid,
-  .featured-grid {
+  .why-grid {
     gap: 16px;
     margin-top: 34px;
   }
@@ -2112,21 +2052,6 @@ ul {
 }
 
 @media (max-width: 700px) {
-  .process-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .process-grid .process-card,
-  .process-grid .process-card:nth-child(4) {
-    grid-column: auto;
-  }
-
-  .process-grid .process-card:nth-child(5) {
-    grid-column: 1 / -1;
-    width: calc((100% - 16px) / 2);
-    justify-self: center;
-  }
-
   .editorial-media-grid {
     grid-auto-columns: minmax(250px, 82vw);
     grid-template-columns: none;
@@ -2154,6 +2079,11 @@ ul {
   .solution-band {
     grid-template-columns: 38px minmax(0, 1fr);
     gap: 12px;
+    align-items: start;
+  }
+
+  .solution-icon {
+    margin-top: 2px;
   }
 
   .solution-band > a {
@@ -2184,17 +2114,8 @@ ul {
     opacity: 0.28;
   }
 
-  .balanced-six-grid,
-  .process-grid {
+  .balanced-six-grid {
     grid-template-columns: 1fr;
-  }
-
-  .process-grid .process-card,
-  .process-grid .process-card:nth-child(4),
-  .process-grid .process-card:nth-child(5) {
-    grid-column: auto;
-    width: auto;
-    justify-self: stretch;
   }
 
   .service-detail-grid {
@@ -2255,10 +2176,7 @@ ul {
 
   .about-page .why-card:hover,
   .services-page .card:hover,
-  .services-page .featured-card:hover,
-  .services-page .partner-card:hover,
-  .services-page .card:focus-within,
-  .services-page .featured-card:focus-within {
+  .services-page .card:focus-within {
     transform: none;
   }
 

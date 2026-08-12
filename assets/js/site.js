@@ -67,7 +67,7 @@ if (c) {
 }
 
 const revealTargets = document.querySelectorAll(
-  "main>section:not(.hero),.hero>div,.grid>*,.why-grid>*,.stats-grid>*,.process-grid>*,.partners-grid>*,.featured-grid>*,.service-showcase-grid>*,.editorial-media-grid>*,.process-timeline>*,.use-case-list>*,.solution-bands>*,.technology-list>*,.faq-container>*"
+  "main>section:not(.hero),.hero>div,.grid>*,.why-grid>*,.service-showcase-grid>*,.editorial-media-grid>*,.process-timeline>*,.use-case-list>*,.solution-bands>*,.technology-list>*,.faq-container>*"
 );
 
 const mainNav = document.querySelector('body > nav[aria-label="Main navigation"]');
@@ -230,36 +230,6 @@ if (!reduceMotion && "IntersectionObserver" in window) {
     el.classList.add("reveal");
     revealObserver.observe(el);
   });
-}
-
-const counters = document.querySelectorAll(".stat-number");
-
-if (counters.length && "IntersectionObserver" in window) {
-  const observer = new IntersectionObserver((entries) =>
-    entries.forEach((entry) => {
-      if (!entry.isIntersecting) return;
-
-      const el = entry.target;
-      const target = parseFloat(el.dataset.target);
-      let current = 0;
-
-      const update = () => {
-        current += target / 80;
-
-        if (current >= target) {
-          el.textContent = target;
-        } else {
-          el.textContent = target % 1 === 0 ? Math.floor(current) : current.toFixed(1);
-          requestAnimationFrame(update);
-        }
-      };
-
-      update();
-      observer.unobserve(el);
-    })
-  );
-
-  counters.forEach((el) => observer.observe(el));
 }
 
 const form = document.getElementById("contactForm");
