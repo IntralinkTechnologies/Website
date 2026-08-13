@@ -635,6 +635,10 @@ section > p + p,
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.balanced-four-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
 .card,
 .why-card,
 .faq-item {
@@ -808,6 +812,10 @@ section > p + p,
   filter: saturate(0.78) contrast(1.04) brightness(0.92);
 }
 
+.service-detail-image-frame-networking img {
+  object-position: 64% 50%;
+}
+
 .service-detail-screenshot-frame {
   position: relative;
   overflow: hidden;
@@ -965,7 +973,7 @@ ul {
 
 .service-showcase-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 1px;
   margin-top: 48px;
   border: 1px solid rgba(111, 164, 255, 0.16);
@@ -1284,6 +1292,14 @@ ul {
   height: 100%;
   object-fit: cover;
   filter: saturate(0.82) contrast(1.03) brightness(0.9);
+}
+
+.editorial-media-frame .editorial-media-image-cctv {
+  object-position: 50% 58%;
+}
+
+.editorial-media-frame .editorial-media-image-workstation {
+  object-position: 50% 68%;
 }
 
 .editorial-media-item figcaption {
