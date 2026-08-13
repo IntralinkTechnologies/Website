@@ -1769,6 +1769,25 @@ ul {
   line-height: 1.65;
 }
 
+.footer-contact-details {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px 18px;
+  margin-top: 14px;
+}
+
+.footer-contact-details .footer-business-name {
+  flex-basis: 100%;
+  color: #eef6ff;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+.footer-contact-details a {
+  color: #bfd5ef;
+  font-weight: 600;
+}
+
 .footer-brand-block .footer-coverage {
   margin-top: 8px;
   color: #6fa4ff;
