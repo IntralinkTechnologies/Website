@@ -427,6 +427,7 @@ body > nav.nav-open .nav-toggle-icon span:last-child {
 .page-hero > div {
   position: relative;
   isolation: isolate;
+  min-width: 0;
 }
 
 .hero-copy::before,
@@ -2384,6 +2385,10 @@ ul {
   }
 
   .balanced-six-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .balanced-four-grid {
     grid-template-columns: 1fr;
   }
 
