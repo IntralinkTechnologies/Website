@@ -19,6 +19,7 @@ $mime = @{
   ".txt"  = "text/plain"
   ".json" = "application/json"
   ".svg"  = "image/svg+xml"
+  ".woff2" = "font/woff2"
 }
 
 while ($listener.IsListening) {

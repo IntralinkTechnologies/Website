@@ -12,6 +12,24 @@
   --muted: #8b96ab;
   --muted-soft: #aeb9cb;
   --shadow: 0 28px 70px rgba(0, 0, 0, 0.35);
+  --font-display: "Bricolage Grotesque", Inter, "Segoe UI", Helvetica, Arial, sans-serif;
+  --font-mono: ui-monospace, "Cascadia Code", "SF Mono", "JetBrains Mono", Consolas, "Roboto Mono", monospace;
+}
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("../fonts/bricolage-grotesque-300.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Bricolage Grotesque";
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url("../fonts/bricolage-grotesque-800.woff2") format("woff2");
 }
 
 * {
@@ -460,6 +478,119 @@ h1 {
   font-weight: 800;
   letter-spacing: -0.04em;
   font-family: Inter, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+/* headline treatment: split-color + corner-bracket frame */
+.headline-frame {
+  position: relative;
+  margin-top: 4px;
+  padding: 24px clamp(4px, 3vw, 28px) 28px 4px;
+}
+
+.headline-frame::before,
+.headline-frame::after,
+.headline-frame .corner-bl,
+.headline-frame .corner-br {
+  content: "";
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border: 2px solid var(--blue-light);
+  pointer-events: none;
+}
+
+.headline-frame::before {
+  top: 0;
+  left: 0;
+  border-right: 0;
+  border-bottom: 0;
+}
+
+.headline-frame::after {
+  top: 0;
+  right: 0;
+  border-left: 0;
+  border-bottom: 0;
+}
+
+.headline-frame .corner-bl {
+  bottom: 0;
+  left: 0;
+  border-right: 0;
+  border-top: 0;
+}
+
+.headline-frame .corner-br {
+  bottom: 0;
+  right: 0;
+  border-left: 0;
+  border-top: 0;
+}
+
+.headline-frame h1 {
+  margin: 0;
+  font-family: var(--font-display);
+  text-wrap: balance;
+}
+
+.headline-frame .line-solid {
+  display: block;
+  color: var(--text);
+  font-weight: 300;
+  letter-spacing: -0.015em;
+}
+
+.headline-frame .line-accent {
+  display: block;
+  margin-top: 2px;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  background: linear-gradient(100deg, var(--blue) 0%, var(--blue-light) 55%, #b9d6ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 6px 24px rgba(47, 111, 237, 0.3));
+}
+
+/* scrolling service ticker, replaces the static badge pill on select pages */
+.service-ticker {
+  display: inline-block;
+  max-width: min(340px, 100%);
+  border-top: 1px solid var(--line-strong);
+  border-bottom: 1px solid var(--line-strong);
+  overflow: hidden;
+  white-space: nowrap;
+  background: rgba(47, 111, 237, 0.04);
+  vertical-align: top;
+}
+
+.service-ticker-track {
+  display: inline-flex;
+  align-items: center;
+  animation: service-ticker-scroll 14s linear infinite;
+  padding: 9px 0;
+}
+
+.service-ticker-track span {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--blue-light);
+  padding: 0 16px;
+  border-right: 1px solid var(--line-strong);
+}
+
+@keyframes service-ticker-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-ticker-track {
+    animation: none;
+  }
 }
 
 p {
@@ -1909,26 +2040,10 @@ ul {
   }
 }
 
-@media (max-width: 900px) {
-  .bg {
-    opacity: 0.72;
-  }
-
-  canvas {
-    opacity: 0.4;
-  }
-
-  .hero-copy::before,
-  .page-hero > div::before {
-    inset: -24px -28px;
-    background: radial-gradient(
-      ellipse at 30% 40%,
-      rgba(3, 8, 15, 0.96) 0%,
-      rgba(3, 8, 15, 0.82) 55%,
-      transparent 82%
-    );
-  }
-
+/* nav-specific breakpoint: switches to the hamburger menu earlier than the
+   general mobile breakpoint, since the nav bar (logo + links + CTA button)
+   runs out of room and wraps awkwardly well above 900px */
+@media (max-width: 1060px) {
   body > nav {
     margin-bottom: -72px;
     padding: 9px 14px;
@@ -2053,6 +2168,27 @@ ul {
     box-shadow:
       0 22px 54px rgba(0, 0, 0, 0.36),
       inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+}
+
+@media (max-width: 900px) {
+  .bg {
+    opacity: 0.72;
+  }
+
+  canvas {
+    opacity: 0.4;
+  }
+
+  .hero-copy::before,
+  .page-hero > div::before {
+    inset: -24px -28px;
+    background: radial-gradient(
+      ellipse at 30% 40%,
+      rgba(3, 8, 15, 0.96) 0%,
+      rgba(3, 8, 15, 0.82) 55%,
+      transparent 82%
+    );
   }
 
   .hero,

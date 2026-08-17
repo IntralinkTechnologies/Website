@@ -95,7 +95,7 @@ const navLinks = mainNav?.querySelector(".links");
 const navBrand = mainNav?.querySelector(".brand");
 
 if (mainNav && navLinks && navBrand) {
-  const mobileNavMedia = matchMedia("(max-width: 900px)");
+  const mobileNavMedia = matchMedia("(max-width: 1060px)");
   const navToggle = document.createElement("button");
   const navToggleLabel = document.createElement("span");
   const navToggleIcon = document.createElement("span");
