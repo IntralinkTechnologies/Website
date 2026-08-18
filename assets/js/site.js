@@ -1,3 +1,6 @@
+const copyrightYear = document.getElementById("copyrightYear");
+if (copyrightYear) copyrightYear.textContent = new Date().getFullYear();
+
 const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const c = document.getElementById("net");
 
@@ -233,6 +236,14 @@ if (!reduceMotion && "IntersectionObserver" in window) {
 }
 
 const form = document.getElementById("contactForm");
+const formStatus = document.getElementById("formStatus");
+
+const setFormStatus = (message, tone) => {
+  if (!formStatus) return;
+  formStatus.textContent = message;
+  formStatus.hidden = false;
+  formStatus.className = `form-status form-status-${tone}`;
+};
 
 if (form) {
   form.addEventListener("submit", async (e) => {
@@ -241,6 +252,7 @@ if (form) {
     const button = form.querySelector("button");
     button.disabled = true;
     button.textContent = "Sending...";
+    if (formStatus) formStatus.hidden = true;
 
     const data = Object.fromEntries(new FormData(form));
 
@@ -256,13 +268,13 @@ if (form) {
       const result = await response.json();
 
       if (response.ok) {
-        alert("Thank you! Your enquiry has been sent.");
+        setFormStatus("Thank you! Your enquiry has been sent — we'll be in touch shortly.", "success");
         form.reset();
       } else {
-        alert(result.error || result.message || "Something went wrong.");
+        setFormStatus(result.error || result.message || "Something went wrong. Please try again.", "error");
       }
     } catch {
-      alert("Unable to send your enquiry. Please try again.");
+      setFormStatus("Unable to send your enquiry. Please check your connection and try again.", "error");
     }
 
     button.disabled = false;
